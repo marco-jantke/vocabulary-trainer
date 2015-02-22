@@ -1,0 +1,65 @@
+---
+
+## common config variables
+path: /var/www/vocabulary_trainer
+vhost: vocabulary-trainer.dev
+
+## vagrant config
+box_name: mayflower/trusty64-puppet3    # or e.g. mayflower/centos-7.0-64-puppet3
+ip: 192.168.56.130
+nfs: true
+
+## puppet profiles
+profile::packages::names:
+  - vim
+  - bash-completion
+  - wget
+  - curl
+
+profile::database::postgresql: true
+profile::webserver::php: true
+profile::javascript::nodejs: true
+
+profile::app::symfony2: true
+
+## postgresql
+component::postgresql::postgres_password: postgres
+component::postgresql::databases:
+   vocabulary_trainer:
+     user: 'dev'
+     password: 'dev'
+
+## nginx (sendfile is turned off in dev)
+nginx::manage_repo: false
+
+## apt
+apt::always_apt_update: true
+apt::purge_sources_list: false
+apt::purge_sources_list_d: false
+apt::purge_preferences_d: false
+
+# php
+php::extensions:
+  curl: {}
+  json: {}
+  intl: {}
+  mysql: {}
+  apc:
+    package_prefix: php-
+    settings:
+      apc.stat: 1
+      apc.stat_ctime: 1
+  xdebug:
+    settings:
+      xdebug.max_nesting_level: 1000
+      xdebug.remote_enable: 'On'
+      xdebug.default_enable: 'On'
+      xdebug.remote_connect_back: 'On'
+
+# cli and fpm php.ini settings
+php::settings:
+  Date/date.timezone: Europe/Berlin
+
+# only fpm php.ini settings
+php::fpm::settings:
+   PHP/short_open_tag: 'On'

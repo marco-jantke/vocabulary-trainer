@@ -16,3 +16,9 @@ Setup db and data fixtures:
     cd /var/www/vocabulary_trainer
     app/console doctrine:schema:create
     app/console doctrine:fixtures:load
+    
+Running the tests:
+  
+    vagrant ssh
+    cd /var/www/vocabulary_trainer
+    bin/phpunit

@@ -44,6 +44,7 @@ php::extensions:
   json: {}
   intl: {}
   mysql: {}
+  pgsql: {}
   apc:
     package_prefix: php-
     settings:

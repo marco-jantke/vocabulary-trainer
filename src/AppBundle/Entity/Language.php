@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-final class Language
+class Language
 {
     /**
      * @ORM\Column(type="integer")

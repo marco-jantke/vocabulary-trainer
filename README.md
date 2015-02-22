@@ -4,21 +4,18 @@
 
 ## Installation
 
-Install the project and start the vagrant setup:
+Install the project, ssh into the machine and prepare the project:
 
     git clone git@github.com:marco-jantke/vocabulary-trainer.git
     cd vocabulary-trainer
     vagrant up
-    
-Setup db and data fixtures:
-
     vagrant ssh
     cd /var/www/vocabulary_trainer
+    composer install
     app/console doctrine:schema:create
     app/console doctrine:fixtures:load
     
-Running the tests:
+    
+Execute the tests from the root directory in the machine:
   
-    vagrant ssh
-    cd /var/www/vocabulary_trainer
     bin/phpunit

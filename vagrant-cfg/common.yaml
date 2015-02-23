@@ -2,7 +2,7 @@
 
 ## common config variables
 path: /var/www/vocabulary_trainer
-vhost: vocabulary-trainer.dev
+vhost: index-cards.dev
 
 ## vagrant config
 box_name: mayflower/trusty64-puppet3    # or e.g. mayflower/centos-7.0-64-puppet3

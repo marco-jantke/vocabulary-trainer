@@ -2,12 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  */
-class Language
+class Tag
 {
     /**
      * @ORM\Column(type="integer")
@@ -24,6 +25,19 @@ class Language
      * @var string
      */
     private $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="IndexCard", inversedBy="tags")
+     * @ORM\JoinTable(name="index_cards_tags")
+     *
+     * @var IndexCard[]
+     */
+    private $indexCards;
+
+    public function __construct()
+    {
+        $this->indexCards = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -60,6 +74,32 @@ class Language
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * @return IndexCard[]
+     */
+    public function getIndexCards()
+    {
+        return $this->indexCards;
+    }
+
+    /**
+     * @param IndexCard[] $indexCards
+     */
+    public function setIndexCards($indexCards)
+    {
+        $this->indexCards = $indexCards;
+    }
+
+    /**
+     * @param IndexCard $indexCard
+     * @return $this
+     */
+    public function addIndexCard(IndexCard $indexCard)
+    {
+        $this->indexCards[] = $indexCard;
         return $this;
     }
 }

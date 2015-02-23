@@ -2,12 +2,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Language;
+use AppBundle\Entity\Tag;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-final class LoadLanguageData extends AbstractFixture implements OrderedFixtureInterface
+final class LoadTagData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * Load data fixtures with the passed EntityManager
@@ -16,19 +16,18 @@ final class LoadLanguageData extends AbstractFixture implements OrderedFixtureIn
      */
     function load(ObjectManager $manager)
     {
-        $german = new Language();
-        $german->setName('Deutsch');
+        $germanToEnglish = new Tag();
+        $germanToEnglish->setName('german-to-english');
 
-        $english = new Language();
-        $english->setName('English');
+        $englishToGerman = new Tag();
+        $englishToGerman->setName('english-to-german');
 
-        $manager->persist($german);
-        $manager->persist($english);
+        $manager->persist($germanToEnglish);
+        $manager->persist($englishToGerman);
         $manager->flush();
 
-        $this->addReference('language-german', $german);
-        $this->addReference('language-english', $english);
-
+        $this->addReference('tag-german-to-english', $germanToEnglish);
+        $this->addReference('tag-english-to-german', $englishToGerman);
     }
 
     /**

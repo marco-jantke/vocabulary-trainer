@@ -37,6 +37,8 @@ Vagrant.configure("2") do |config|
   config.vm.box = cnf['box_name']
   config.vm.hostname = cnf['vhost']
 
+  config.vm.network "forwarded_port", guest: 5432, host: 5432
+
   # Use vagrant-hostmanager if installed
   if Vagrant.has_plugin?('vagrant-hostmanager')
     config.hostmanager.enabled = true
